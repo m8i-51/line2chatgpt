@@ -92,6 +92,15 @@ def handle_message(event):
     post_messages.append(DEFAULT_ROLE)
     for message in messages:
         post_messages.append(message)
+    if event.source.type == "group":
+        if (
+            "**さん" in user_message
+            or "**くん" in user_message
+            or "**ちゃん" in user_message
+        ):
+            pass
+        else:
+            return
     if "画像生成" in user_message or "画像を生成" in user_message or "画像の生成" in user_message:
         try:
             deeplAuthStr = "DeepL-Auth-Key " + DEEPL_SECRETKEY
